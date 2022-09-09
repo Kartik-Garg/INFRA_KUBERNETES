@@ -5,6 +5,9 @@ metadata:
 spec:
   containers:
   - name: task1
-    image: wbitt/network-multitool
+    image: alpine
+    command:
+    - sleep
+    - "3600"
     ports:
     - containerPort: 80  

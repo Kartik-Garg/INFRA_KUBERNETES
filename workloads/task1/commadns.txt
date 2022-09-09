@@ -1,3 +1,6 @@
 sudo kubectl apply -f simple-pod.yaml
 
 sudo kubectl exec -it simple-pod1 -- sh
+
+1) Once in the shell, install network packages in alpine using: 
+apk add bind-tools
