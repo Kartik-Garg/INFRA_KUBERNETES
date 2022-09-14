@@ -1,0 +1,5 @@
+to start the pod:
+sudo kubectl apply -f static-pod.yaml
+
+to access it using localhost (localhost:containerport):
+sudo kubectl port-forward static-pod 8080:80

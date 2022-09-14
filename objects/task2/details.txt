@@ -1,0 +1,8 @@
+sudo kubectl get pod nginx-deployment-ff6774dc6-6nmx7 -o yaml
+
+labels:
+    app: nginx
+
+nginx-deployment-ff6774dc6-6nmx7   1/1     Running   0          3h23m
+
+sudo kubectl label --overwrite pods nginx-deployment-ff6774dc6-6nmx7 app: nginx1
