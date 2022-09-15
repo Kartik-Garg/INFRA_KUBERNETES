@@ -1,0 +1,41 @@
+1) Kind clusters, do not come with any sort of network add-ons to apply network policy
+2) had to use calico with kind to achieve network policy implementation
+3) There are no concrete steps to achieve it, most of the steps online are outdated, and they do not work
+
+------------ To Install Calico with Kind -------------------
+
+1) first create a config file for kind cluster where we disable 'kindnet', so we can use 'Calico' with it <--- refer kind-calico.yaml in the same repo to see the file
+   use command: kind create cluster --config kind-calico.yaml to create the kind cluster using the config file
+
+2) verify the kind cluster to make sure that the kindnet is stopped
+    use command: export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
+                 kubectl get pods -n kube-system
+
+3) download the calico manifest file from/using the command:
+    curl https://docs.projectcalico.org/manifests/calico-typha.yaml -o calico.yaml
+
+4) after downloading, apply the following command:
+    kubectl apply -f calico.yaml
+
+5) Relaxing Calico's RPF Check Configuration:
+    By default, Calico pods fail if the Kernel's Reverse Path Filtering (RPF) check is not enforced. This is a security measure to prevent endpoints from spoofing their IP address.
+    The RPF check is not enforced in Kind nodes. Thus, we need to disable the Calico check by setting an environment variable in the calico-node DaemonSet:
+    kubectl -n kube-system set env daemonset/calico-node FELIX_IGNORELOOSERPF=true
+
+6) Verify if calico is up:
+    kubectl -n kube-system get pods | grep calico-node
+
+-------------- Done! --------------
+
+---------- commands used in this task ----------
+1) Create a nginx deployment:
+    kubectl create deployment nginx --image=nginx
+2) expose it using a service, where service runs on port 80:
+    kubectl expose deployment nginx --port=80  
+3) apply the network policy using:
+    kubectl apply -f nginx-policy.yaml
+4) try accessing it using a busybox pod
+    kubectl run busybox --rm -ti --image=busybox:1.28 -- /bin/sh
+   Once inside the shell, run:
+    wget --spider --timeout=1 nginx
+   if network policy is successful, we will get timeout            
