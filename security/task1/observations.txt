@@ -1,0 +1,1 @@
+We will be using clusterRoles since they do not depend on namespaces

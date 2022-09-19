@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: testingclusterrolebinding
+subjects:
+- kind: ServiceAccount
+  name: default
+  apiGroup: ""
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: pod-reader
+  apiGroup: ""    
