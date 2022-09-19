@@ -1,0 +1,4 @@
+hostpath, hosts the node's (host's) directories and files onto the pods where these volumes are mounted at
+disadvantage:
+since the files are present on node's directories, we need special permission to write to it(priveldged permission)
+since pods can be scheduled on multiple worker nodes, the controller will create hostpath volumes on all those nodes, and each pod is going to use it differently thus creating inconsistecny.
