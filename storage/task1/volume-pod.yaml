@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-pod
+spec:
+  volumes:
+  - name: test-volume
+    emptyDir: {}
+
+  initContainers:
+  - name: init-debian-container
+    image: debian
+
+    volumeMounts:
+    - name: test-volume
+      mountPath: /work
+
+    command: ["/bin/sh"]
+    args: ["-c", "echo hello from debian > /work/index.html"]
+
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: test-volume
+      mountPath: /usr/share/nginx/html    
