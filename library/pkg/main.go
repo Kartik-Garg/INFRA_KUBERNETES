@@ -32,7 +32,7 @@ func main() {
 
 	dbPass := os.Getenv("DB_PASS")
 	if dbPass == "" {
-		dbPass = ""
+		dbPass = "password"
 	}
 
 	apiPath := os.Getenv("API_PATH")
@@ -119,7 +119,7 @@ func (l library) getBooks(w http.ResponseWriter, r *http.Request) {
 }
 
 func (l library) openConnection() *sql.DB {
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@(%s)/%s", "root", "", l.dbHost, l.dbName))
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@(%s)/%s", "root", l.dbPass, l.dbHost, l.dbName))
 	if err != nil {
 		log.Fatalf("%s\n", err.Error())
 	}
