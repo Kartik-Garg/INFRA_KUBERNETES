@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: net
+  template:
+    metadata:
+      labels:
+        app: net
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx-container
+        ports:
+        - containerPort: 8081            

@@ -1,0 +1,7 @@
+1) first have to run the service and then the pods, otherwise the service doesn't listen to them. In this case:
+    sudo kubectl scale deployments <deployment-name> -n ns1 --replicas=<replicas_number>
+2) after running the busy-box pod, enter it using -- sh command
+3) run nslookup <service-name> to check service details, in turn this will verify that this certain pod can access the service 
+4) run command:
+    nc -zv my-svc <port-number-of-service>
+    to check if port is opened, this also verifies that pod can access the service    

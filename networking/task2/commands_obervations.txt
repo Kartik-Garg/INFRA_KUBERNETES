@@ -1,0 +1,5 @@
+To access the pods in different namespaces we have to use DNS;
+basic syntax is something like:
+<servicename>.<namespace of where service is present>.svc.cluster.local
+
+this command can be run in combination with nslookup, since we just have to check if we can access the particular service which is already bound with our nginx application

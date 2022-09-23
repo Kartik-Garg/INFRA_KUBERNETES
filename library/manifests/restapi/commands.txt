@@ -1,0 +1,7 @@
+file contains commands used here
+1) sudo k create deployment restapi --image kartikgarg/library:0.1.0 -n restapi --dry-run -oyaml > restapi.yaml
+2) sudo kubectl create ns restapi --dry-run -oyaml > ns.yaml
+3) sudo kubectl create configmap restapi-cm -n restapi --from-literal host=localhost:8080 --from-literal dbname=library --dry-run -oyaml > configmap.yaml
+4) sudo kubectl apply -f configmap.yaml -n restapi
+5) cp ../mysql/secret.yaml .
+6) apply secret after changing its ns

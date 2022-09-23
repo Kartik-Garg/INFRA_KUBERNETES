@@ -1,0 +1,31 @@
+Using files:
+- can use configuration files and kubectl commands
+- run the following commands to add data to the files:
+    echo -n 'admin' > ./username.txt
+    echo -n 'password' > ./password.txt
+    Here, -n flag tells the system to not add a new line in the file after writing into into
+- To create secret with keys in it, command to run it would have following syntax:
+    kubectl create secret generic [secret-name] \  
+    --from-file=[key1]=[file1] \  
+    --from-file=[key2]=[file2]    
+  in our case, sudo kubectl create secret generic my-secret --from-file=username=./username.txt --from-file=password=./password.txt 
+
+Using files the secrets are displayed normally in the env variables  
+
+in case of files the secrets are not encrypted and they are simply present in the base64 encoding
+
+------------ Using Literals ------------
+
+command to create a secret using literal is as follows:
+    kubectl create secret generic NAME [--type=string] [--from-literal=key1=value1] [--dry-run]
+in our case,
+    sudo kubectl create secret generic my-secret --from-literal=username=admin --from-literal=password=password    
+
+when accessing secrets as env variables through any pods then the secrets are always decoded
+
+when viewing the secret using command:
+sudo kubectl get secret my-secret -o jsonpath='{.data}'
+secrets are encrypted, as : {"password":"cGFzc3dvcmQ=","username":"YWRtaW4="}
+
+
+

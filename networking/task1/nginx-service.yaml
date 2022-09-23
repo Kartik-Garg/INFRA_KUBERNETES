@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-svc
+  labels:
+    app: my-svc
+spec:
+  selector:
+    app: net
+  ports:
+  - port: 80
+          

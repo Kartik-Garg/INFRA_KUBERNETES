@@ -1,0 +1,7 @@
+1) port forward on restapi service to work with localhost:
+sudo kubectl port-forward -n restapi svc/restapi 8080
+2) to listen to logs:
+    sudo kubectl get pods -n restapi
+    sudo kubectl logs -n restapi pod_name -f
+
+also had to execute mysql deployment pod to create a new database a table with the correct schema

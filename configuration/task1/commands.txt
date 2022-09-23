@@ -1,0 +1,3 @@
+1) First create the MapConfig file by using apply -f 
+2) Then create the nginx-pod pod
+3) Run the exec command to enter the shell and type "env" our env-variable can be seen there

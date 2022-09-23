@@ -1,0 +1,3 @@
+We will be using clusterRoles since they do not depend on namespaces
+If we do not define a service account with our pod, the controller automatically creates default service account for our pod, and we can use that to give permissions to
+We bind required cluster role permissions to the service account used by our pod.
